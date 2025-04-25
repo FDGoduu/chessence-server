@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <title>♟ Chessence ♟</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+	<!-- 🧾 Rejestracja -->
+	<div id="registerScreen" class="auth-screen" style="display: none;">
+	  <div class="auth-box">
+		<h2>Rejestracja</h2>
+		<input type="text" id="registerNickname" placeholder="Nick">
+		<input type="password" id="registerPassword" placeholder="Hasło">
+		<input type="password" id="registerConfirmPassword" placeholder="Powtórz hasło">
+		<button id="registerSubmit">Zarejestruj się</button>
+		<p class="auth-switch">Masz konto? <span id="switchToLogin">Zaloguj się</span></p>
+	  </div>
+	</div>
+
+	<!-- 🔐 Logowanie -->
+	<div id="loginScreen" class="auth-screen" style="display: none;">
+	  <div class="auth-box">
+		<h2>Logowanie</h2>
+		<input type="text" id="loginNickname" placeholder="Nick">
+		<input type="password" id="loginPassword" placeholder="Hasło">
+		<button id="loginSubmit">Zaloguj się</button>
+		<p class="auth-switch">Nie masz konta? <span id="switchToRegister">Zarejestruj się</span></p>
+	  </div>
+	</div>
+    <!-- Menu startowe z wyborem koloru i trudności -->
+	<div id="startScreen" class="start-screen">
+	  <div class="start-logo" id="startLogo">
+		<img src="img/logo.png" alt="Chessence Logo">
+	  </div>
+	  	<div id="exitButton">
+		  <img src="img/exit.png" alt="Wyjście z gry">
+		</div>
+	  <div class="start-box" id="startWrapper">
+
+		<div class="button-group mode-buttons" id="modeButtons">
+		  <button id="modePVB">Gracz vs Bot</button>
+		  <button id="modePVP">Gracz vs Gracz</button>
+		  <button id="modeBVB">Bot vs Bot</button>
+		</div>
+
+		<button id="openProfileBtn" class="profile-button">👤 Profil Gracza</button>
+
+		<div class="button-group" id="colorButtons" style="display: none;">
+		  <button id="chooseWhite">Białe</button>
+		  <button id="chooseBlack">Czarne</button>
+		</div>
+
+		<div id="difficultyPVBContainer" style="display: none;">
+		  <div class="bot-difficulty-group">
+			<label for="difficultyPVB">
+			  Poziom trudności:
+			  <span id="difficultyPVBName" class="difficulty-name">Dread</span>
+			  <div id="difficultyPVBDesc" class="difficulty-desc">Niepokojąco cichy. Czasem ustawi zasadzkę, której nie widziałeś.</div>
+			</label>
+			<input type="range" id="difficultyPVB" min="0" max="10" value="5">
+		  </div>
+		</div>
+
+		<!-- PvP Submode -->
+		<div id="pvpSubmodeButtons" class="button-group" style="display: none;">
+		  <button id="chooseHotseat">Hotseat</button>
+		  <button id="chooseOnline">Online</button>
+		</div>
+		<!-- UI dla trybu Online -->
+		<div id="onlineUI" class="online-ui" style="display: none;">
+		  <input type="text" id="roomCodeInput" placeholder="Kod pokoju (np. AB3XK7)" maxlength="12">
+		  <button id="createRoomBtn">🆕 Stwórz pokój</button>
+		  <button id="joinRoomBtn">🔗 Dołącz do pokoju</button>
+		  <div id="onlineStatus" class="online-status"></div>
+		</div>
+
+
+
+
+		<div id="difficultyBVBContainer" style="display: none;">
+		  <div class="bot-difficulty-group">
+			<label for="difficultyWhite">
+			  Poziom trudności Białego Bota:
+			  <span id="difficultyWhiteValue">5</span>
+			</label>
+			<input type="range" id="difficultyWhite" min="0" max="10" value="5">
+		  </div>
+
+		  <div class="bot-difficulty-group">
+			<label for="difficultyBlack">
+			  Poziom trudności Czarnego Bota:
+			  <span id="difficultyBlackValue">5</span>
+			</label>
+			<input type="range" id="difficultyBlack" min="0" max="10" value="5">
+		  </div>
+		</div>
+
+		<button id="startGame" disabled>Rozpocznij grę</button>
+	  </div>
+	</div>
+
+	<div id="profileScreen">
+	<div class="profile-cover">
+	  <img id="profileBackgroundImage" src="" alt="Tło profilu">
+	  <div class="profile-gradient-mask"></div>
+	</div>
+	<div class="profile-header">
+	  <div class="profile-header-left">
+		<div class="profile-avatar-section">
+		  <div class="profile-avatar-wrapper">
+			<div class="profile-avatar-container">
+			  <img id="profileAvatar" class="profile-avatar" src="img/avatars/avatar1.png">
+			</div>
+			<img id="profileAvatarFrame" class="profile-avatar-frame" src="img/frames/default_frame.png">
+		  </div>
+		  <div class="profile-background-container" onclick="openBackgroundSelector()">
+			<div class="profile-background-label">Zmień tło</div>
+		  </div>
+		</div>
+	  </div>
+	  <div class="profile-info">
+	    <div class="player-nickname" id="playerNickname">FDGod</div>
+		<div class="profile-name" id="playerLevel">Poziom 1</div>
+		<div id="xpCounter" class="xp-counter">0 / 80 XP</div>
+		<div class="profile-xp-bar">
+		  <div id="xpBar" class="xp-fill"></div>
+		</div>
+	  </div>
+	</div>
+		<div class="profile-tabs">
+		  <div class="profile-tabs-line"></div>
+		  <div class="profile-tabs-buttons">
+		  <button onclick="openProfileTab('achievements')" class="tab-button active" id="tab-achievements">🏆 Osiągnięcia</button>
+		  <button onclick="openProfileTab('stats')" class="tab-button" id="tab-stats">📊 Statystyki</button>
+		  <button onclick="openProfileTab('other')" class="tab-button" id="tab-other">⚙️ Inne</button>
+		  <button onclick="openProfileTab('friends'); renderInvites()" class="tab-button" id="tab-friends">👥 Znajomi</button>
+		</div>
+		</div>
+	<div id="profileContent">
+		<div class="profile-tab-content" id="tabContent-achievements" style="display: none;">
+		    <ul id="achievementsList" class="achievements-list">
+			<!-- Tutaj wstawiają się osiągnięcia dynamicznie przez JS -->
+		  </ul>
+			<div id="achievementsPagination" class="pagination-controls">
+			<button id="prevAchievementsPage" class="arrow-button">
+			  <img src="img/arrow_left.png" alt="Poprzednia" class="arrow-icon">
+			</button>
+			  <div id="achievementsPageIndicator" class="pagination-indicator">1 / 2</div>
+			<button id="nextAchievementsPage" class="arrow-button">
+			  <img src="img/arrow_right.png" alt="Następna" class="arrow-icon">
+			</button>
+			</div>
+		</div>
+		<div class="profile-tab-content" id="tabContent-stats" style="display: none;">
+		  <p style="color: #ccc;">Statystyki zostaną wkrótce dodane.</p>
+		</div>
+
+		<div class="profile-tab-content" id="tabContent-other" style="display: none;">
+		  <p style="color: #ccc;">Tu pojawią się ustawienia i informacje dodatkowe.</p>
+		</div>
+		<div class="profile-tab-content" id="tabContent-friends" style="display: none;">
+		  <div class="friends-section">
+			<h3>Twoi znajomi</h3>
+			<div id="friendsList" class="friends-list"></div>
+
+			<div class="add-friend-box">
+			  <input type="text" id="addFriendInput" placeholder="Nick lub ID znajomego" />
+			  <button onclick="sendFriendRequest(document.getElementById('addFriendInput').value)">➕ Dodaj znajomego</button>
+			</div>
+
+			<div id="friendStatus" class="friend-status-text"></div>
+
+			<h3>Otrzymane zaproszenia</h3>
+			<div id="inviteList" class="invite-list"></div>
+		  </div>
+		</div>
+	</div>
+
+	<div class="profile-controls">
+	  <button id="resetProgressBtn" class="profile-btn red">
+		  <img src="/img/reset.png" class="icon-inline" alt="Reset">
+		  Resetuj postęp
+		</button>
+	  <button onclick="closeProfileScreen()" class="profile-btn">Wróć</button>
+	  <button id="backToOwnProfileBtn" onclick="openProfileScreen()" class="profile-btn">POWRÓT DO PROFILU</button>
+	</div>
+
+	</div>
+
+
+  <!-- 🔥 EKRAN GRY – poza containerem -->
+	<div id="gameScreen" style="display: none;">
+	  <div class="top-row">
+	  <div id="leftPanel">
+<div class="capture-box captured-top">
+  <div class="capture-label">Zbite przez czarne</div>
+  <div id="capturedByBlack" class="captured-pieces"></div>
+</div>
+
+		  <div id="status"></div>
+
+<div class="capture-box captured-bottom">
+  <div class="capture-label">Zbite przez białe</div>
+  <div id="capturedByWhite" class="captured-pieces"></div>
+</div>
+	  </div>
+		<div class="board-wrapper">
+			<div id="topBotLabel" class="bot-label"></div>
+		  <div id="boardContainer">
+			<div id="board"></div>
+		  </div>
+		  <div id="bottomBotLabel" class="bot-label"></div>
+		</div>
+
+		<div id="rightPanel">
+		  <div id="floatingStatus" class="floating-status">
+			  <div class="alert" id="alertBox" style="display: none;"></div>
+		  </div>
+		  <div id="evalBar">
+			<div id="evalTooltip">Analiza...</div>
+			<div id="evalFill"></div>
+		  </div>
+		  <div id="evalScore">=</div>
+		  <button id="restartBtn" onclick="resetGame(true)">🔁 Nowa partia</button>
+		</div>
+	  </div>
+
+	  <div id="moveLog">
+		<h3>📜 Log ruchów</h3>
+		<ul id="logList"></ul>
+	  </div>
+	</div>
+
+  <!-- Pozostałe elementy -->
+  <div id="endScreen" style="display:none;">
+    <h2 id="endMessage"></h2>
+    <button onclick="resetGame(true)">🔁 Zagraj ponownie</button>
+  </div>
+
+  <div id="promotionModal" style="display:none;">
+    <h3>Promuj pionka do:</h3>
+    <div class="promotion-options">
+      <button class="promotion-option" data-piece="q">♕ Hetman</button>
+      <button class="promotion-option" data-piece="r">♖ Wieża</button>
+      <button class="promotion-option" data-piece="b">♗ Goniec</button>
+      <button class="promotion-option" data-piece="n">♘ Skoczek</button>
+    </div>
+  </div>
+  
+	<div id="mateOverlay" class="mate-overlay" style="display: none;">
+	  <div class="mate-text">SZACH-MAT!</div>
+	</div>
+	<div id="levelOverlay" class="level-overlay" style="display: none;">
+		<div class="level-text">LEVEL UP!</div>
+	</div>
+
+<div id="avatarSelector" class="avatar-selector" style="display: none;">
+  <div class="avatar-popup">
+    <h3>Wybierz Awatar lub Ramkę</h3>
+    <div class="profile-tabs">
+      <div class="profile-tabs-buttons">
+		<button class="avatar-tab-button active" onclick="switchAvatarTab('avatars')">Awatary</button>
+		<button class="avatar-tab-button" onclick="switchAvatarTab('frames')">Ramki</button>
+      </div>
+    </div>
+
+    <div id="avatarTab" class="tab-content">
+      <div class="avatar-grid avatar-grid-avatar" id="avatarGridContainer"></div>
+    </div>
+
+    <div id="frameTab" class="tab-content" style="display: none;">
+      <div class="avatar-grid avatar-grid-avatar" id="frameGridContainer"></div>
+    </div>
+
+    <button onclick="closeAvatarSelector()">Zamknij</button>
+  </div>
+</div>
+
+
+	<div id="backgroundSelector" class="avatar-selector" style="display: none;">
+	  <div class="avatar-popup">
+		<h3>Wybierz tło</h3>
+		<div class="avatar-grid avatar-grid-background" id="backgroundGridContainer"></div>
+		<button onclick="closeBackgroundSelector()">Zamknij</button>
+	  </div>
+	</div>
+	
+<div id="authControls" class="fixed-auth-buttons">
+  <button id="deleteAccountBtn" class="profile-btn red small fixed-corner">USUŃ KONTO</button>
+  <button id="logoutBtn" class="profile-button logout-button fixed-corner">Wyloguj</button>
+</div>
+<div class="fixed-corner version-label" id="gameVersion">v 0.5 (multi test)</div>
+  <script src="http://localhost:3000/socket.io/socket.io.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
