@@ -1,6 +1,6 @@
 const board = document.getElementById("board");
 let socket = null;
-const API_BASE = "https://chessence-server.onrender.com";
+const API_BASE = "https://chessence-backend.onrender.com";
 let activeUserNick = null; // 🧠 aktualnie zalogowany użytkownik w tej karcie
 
 try {
