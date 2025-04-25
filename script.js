@@ -4,7 +4,7 @@ const API_BASE = "https://chessence-server.onrender.com";
 let activeUserNick = null; // 🧠 aktualnie zalogowany użytkownik w tej karcie
 
 try {
-  socket = io("http://127.0.0.1:3000");
+  socket = io(API_BASE);
   socket.on("connect", () => {
     socketId = socket.id;
     console.log("🆔 Moje socket.id:", socketId);
