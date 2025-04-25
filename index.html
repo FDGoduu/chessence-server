@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <title>♟ Chessence ♟</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="./style.css">
 </head>
 <body>
 	<!-- 🧾 Rejestracja -->
@@ -31,10 +31,10 @@
     <!-- Menu startowe z wyborem koloru i trudności -->
 	<div id="startScreen" class="start-screen">
 	  <div class="start-logo" id="startLogo">
-		<img src="img/logo.png" alt="Chessence Logo">
+		<img src="./img/logo.png" alt="Chessence Logo">
 	  </div>
 	  	<div id="exitButton">
-		  <img src="img/exit.png" alt="Wyjście z gry">
+		  <img src="./img/exit.png" alt="Wyjście z gry">
 		</div>
 	  <div class="start-box" id="startWrapper">
 
@@ -110,9 +110,9 @@
 		<div class="profile-avatar-section">
 		  <div class="profile-avatar-wrapper">
 			<div class="profile-avatar-container">
-			  <img id="profileAvatar" class="profile-avatar" src="img/avatars/avatar1.png">
+			  <img id="profileAvatar" class="profile-avatar" src="./img/avatars/avatar1.png">
 			</div>
-			<img id="profileAvatarFrame" class="profile-avatar-frame" src="img/frames/default_frame.png">
+			<img id="profileAvatarFrame" class="profile-avatar-frame" src="./img/frames/default_frame.png">
 		  </div>
 		  <div class="profile-background-container" onclick="openBackgroundSelector()">
 			<div class="profile-background-label">Zmień tło</div>
@@ -144,11 +144,11 @@
 		  </ul>
 			<div id="achievementsPagination" class="pagination-controls">
 			<button id="prevAchievementsPage" class="arrow-button">
-			  <img src="img/arrow_left.png" alt="Poprzednia" class="arrow-icon">
+			  <img src="./img/arrow_left.png" alt="Poprzednia" class="arrow-icon">
 			</button>
 			  <div id="achievementsPageIndicator" class="pagination-indicator">1 / 2</div>
 			<button id="nextAchievementsPage" class="arrow-button">
-			  <img src="img/arrow_right.png" alt="Następna" class="arrow-icon">
+			  <img src="./img/arrow_right.png" alt="Następna" class="arrow-icon">
 			</button>
 			</div>
 		</div>
@@ -179,7 +179,7 @@
 
 	<div class="profile-controls">
 	  <button id="resetProgressBtn" class="profile-btn red">
-		  <img src="/img/reset.png" class="icon-inline" alt="Reset">
+		  <img src="./img/reset.png" class="icon-inline" alt="Reset">
 		  Resetuj postęp
 		</button>
 	  <button onclick="closeProfileScreen()" class="profile-btn">Wróć</button>
@@ -291,7 +291,7 @@
   <button id="logoutBtn" class="profile-button logout-button fixed-corner">Wyloguj</button>
 </div>
 <div class="fixed-corner version-label" id="gameVersion">v 0.5 (multi test)</div>
-  <script src="http://localhost:3000/socket.io/socket.io.js"></script>
-  <script src="script.js"></script>
+<script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
+  <script src="./script.js"></script>
 </body>
 </html>
